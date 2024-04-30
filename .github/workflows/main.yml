@@ -27,8 +27,8 @@ jobs:
       with:
         python-version: 3.12.3
     - name: Install requirements
-      run: python -m pip install -r requirements.txt
-    - run: python updater.py
+      run: python -m pip install -r ./.github/workflows/requirements.txt
+    - run: python ./.github/workflows/updater.py
     - name: Commit
       run: |
         git add versions.json
