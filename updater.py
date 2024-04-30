@@ -33,10 +33,10 @@ if res.status_code == 200:
             plat = i.attrs["data-platform"]
             link = i.attrs["href"]
             mcver = link[link.rindex("-")+1:].replace(".zip", "")
-            if not mcver in data.keys(): data[mcver] = {}
+            if not mcver in data.keys(): data[mcver] = {"preview": "Preview" in plat}
             if any(a in plat for a in ["Windows", "Linux"]): data[mcver]["Windows" if "Windows" in plat else "Linux"] = link
     with open("versions.json", "w") as f:
         f.write(json.dumps(data))
     print("Updated!")
 else:
-    print("Failed! [{}]".format(res.status_code))
+    raise requests.ConnectionError("Failed! Status Code: {}".format(res.status_code))
