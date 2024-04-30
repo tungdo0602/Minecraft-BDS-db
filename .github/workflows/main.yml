@@ -2,9 +2,6 @@ name: Update versions
 on:
   schedule:
     - cron: '0 */12 * * *'
-  push:
-    branches: 
-      - 'main'
 
 permissions:
   contents: write
@@ -23,6 +20,7 @@ jobs:
     - run: python updater.py
     - name: Commit
       run: |
+        git add versions.json
         git config --local user.email "69420+github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
         git commit -am "New BDS Version!"
