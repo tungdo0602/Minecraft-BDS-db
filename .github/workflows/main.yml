@@ -31,10 +31,10 @@ jobs:
     - name: Check latest BDS version
       id: checkver
       run: |
-        sha256sum version.json > hash1.txt
+        sha256sum ./version.json > ./hash1.txt
         python ./.github/workflows/updater.py
-        sha256sum version.json > hash2.txt
-        if cmp -s original-hash.txt updated-hash.txt; then
+        sha256sum ./version.json > ./hash2.txt
+        if cmp -s ./original-hash.txt ./updated-hash.txt; then
           echo "::set-output name=changed::false"
         else
           echo "::set-output name=changed::true"
